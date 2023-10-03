@@ -24,7 +24,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include("pages.urls")),
-    path("projects/", include("projects.urls"))# this line of code includes all the URLs in the projects app
+    path("", include("projects.urls"))# this line of code includes all the URLs in the projects app
     # that include the prefix projects/. There are now 2 full URLs that you can access with your project. 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 # to successfully serve media files, you also need to register the static routes to your media files in
