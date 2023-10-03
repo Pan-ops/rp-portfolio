@@ -11,6 +11,12 @@
     .right-half {
         flex: 1;
     }
+    h1 {
+        margin-bottom: 20px; /* Add space below the <h1> elements */
+    }
+    body{
+        margin-top: 30px;
+    }
 </style>
 <body>
     <div class="split-container">
@@ -27,26 +33,28 @@
             {% if text %}
                 <p>{{text.text}}</p> 
             {% endif %}
-            <section id="portfolio">
-            <h1>My Portfolio</h1>
             <!-- Add your projects or portfolio items here -->
-            <div class="portfolio-item">
-                <img src="project1.jpg" alt="Project 1">
-                <h2>Project 1</h2>
-                <p>Description of project 1.</p>
+            <h1>Projects</h1>
+            <div class="row">
+            {% for project in projects %} <!--return render(request, "projects/project_index.html",context)-->
+                <div class="col-md-6">
+                    <div class="card mb-2">
+                        {% if project.image %}
+                            <img class="card-img-top" src="{{project.image.url}}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ project.title }}</h5>
+                            <p class="card-text">{{ project.description }}</p>
+                            <a href="{% url 'project_detail' project.pk %}"class="btn btn-primary">
+                                Read More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            <div class="portfolio-item">
-                <img src="project2.jpg" alt="Project 2">
-                <h2>Project 2</h2>
-                <p>Description of project 2.</p>
-            </div>
-        </section>
         </div>
-    </div>
-    
-    
-</body>
-        
+    </div>       
        
         
         <section id="contact">
@@ -55,7 +63,7 @@
         </section>
         
         <footer>
-            <p>&copy; 2023 Your Name</p>
+            <p>&copy; 2023 Panhx.com</p>
         </footer>
     </body>  
 {% endblock page_content %}
