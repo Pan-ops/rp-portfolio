@@ -1,0 +1,61 @@
+<!-- Home_pages/templates/pages/home.html -->
+{% extends "base.html" %}
+{% block page_content %}
+<style>
+    .split-container {
+        display: flex;
+    }
+    .left-half {
+        flex: 0.5;
+    }
+    .right-half {
+        flex: 1;
+    }
+</style>
+<body>
+    <div class="split-container">
+        <div class="left-half">
+            <h1>Hi, I am Pan.</h1>
+            {% if pic %}
+                <img src="{{pic.url}}", width="300", height="auto">
+                <p>{{discription}}</p>
+            {% endif %}
+        </div>
+
+        <div class="right-half">
+            <h1>About Me</h1>
+            {% if text %}
+                <p>{{text.text}}</p> 
+            {% endif %}
+            <section id="portfolio">
+            <h1>My Portfolio</h1>
+            <!-- Add your projects or portfolio items here -->
+            <div class="portfolio-item">
+                <img src="project1.jpg" alt="Project 1">
+                <h2>Project 1</h2>
+                <p>Description of project 1.</p>
+            </div>
+            <div class="portfolio-item">
+                <img src="project2.jpg" alt="Project 2">
+                <h2>Project 2</h2>
+                <p>Description of project 2.</p>
+            </div>
+        </section>
+        </div>
+    </div>
+    
+    
+</body>
+        
+       
+        
+        <section id="contact">
+            <h1>Contact Me</h1>
+            <p>You can reach me at pan@panhx.com.</p>
+        </section>
+        
+        <footer>
+            <p>&copy; 2023 Your Name</p>
+        </footer>
+    </body>  
+{% endblock page_content %}
