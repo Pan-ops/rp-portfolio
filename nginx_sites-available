@@ -1,0 +1,47 @@
+server {
+    server_name 20.55.69.96, 10.0.0.4, panhx.com, www.panhx.com;
+
+    # SSL certificate and key files
+
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+
+    server_name panhx.com www.panhx.com;
+    ssl_certificate /etc/letsencrypt/live/panhx.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/panhx.com/privkey.pem; # managed by Certbot
+
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+
+    location /static/ {
+        alias /home/pan/rp-portfolio/static/;
+    }
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+
+
+}
+
+server {
+    if ($host = www.panhx.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    if ($host = panhx.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name 20.55.69.96, 10.0.0.4, panhx.com, www.panhx.com;
+
+    server_name panhx.com www.panhx.com;
+    return 404; # managed by Certbot
+
+
+
+
+}
